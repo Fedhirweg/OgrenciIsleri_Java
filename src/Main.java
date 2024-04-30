@@ -8,47 +8,43 @@ public class Main {
         while (true) {
             System.out.println("1. Register\n2. Login\n3. Delete User\n4. Exit");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // consume newline
+            scanner.nextLine(); // yenisatir karakterini tüket
 
             switch (choice) {
                 case 1:
-                    System.out.println("Enter username:");
+                    System.out.println("Kullanıcı Adı Giriniz:");
                     String regUsername = scanner.nextLine();
-                    System.out.println("Enter password:");
+                    System.out.println("Şifre Giriniz:");
                     String regPassword = scanner.nextLine();
-                    System.out.println("Confirm password:");
+                    System.out.println("Şifreyi Doğrulayın:");
                     String confirmPassword = scanner.nextLine();
                     userManager.registerUser(regUsername, regPassword, confirmPassword);
                     break;
                 case 2:
-                    System.out.println("Enter username:");
+                    System.out.println("Kullanıcı Adı Giriniz:");
                     String loginUsername = scanner.nextLine();
-                    System.out.println("Enter password:");
+                    System.out.println("Şifre Giriniz:");
                     String loginPassword = scanner.nextLine();
                     User loggedInUser = userManager.loginUser(loginUsername, loginPassword);
                     if (loggedInUser != null) {
-                        System.out.println("Welcome, " + loggedInUser.getUsername() + "!");
+                        System.out.println("Hoşgeldiniz, " + loggedInUser.getUsername() + "!");
                         int menuChoice;
                         do {
                             displayMenu();
                             menuChoice = scanner.nextInt();
-                            scanner.nextLine();  // consume newline
+                            scanner.nextLine();  // yenisatir karakterini tüket
                             switch (menuChoice) {
                                 case 1:
                                     System.out.println("Öğrenci İşlemleri");
-                                    // Add your code for Öğrenci İşlemleri here
                                     break;
                                 case 2:
                                     System.out.println("Öğretim Görevlisi İşlemleri");
-                                    // Add your code for Öğretim Görevlisi İşlemleri here
                                     break;
                                 case 3:
                                     System.out.println("Ders İşlemleri");
-                                    // Add your code for Ders İşlemleri here
                                     break;
                                 case 4:
                                     System.out.println("Not İşlemleri");
-                                    // Add your code for Not İşlemleri here
                                     break;
                                 case 5:
                                     System.out.println("Bölüm İşlemleri");
@@ -81,26 +77,26 @@ public class Main {
                                     } while (departmentChoice != 4);
                                     break;
                                 case 6:
-                                    System.out.println("Exiting to user menu...");
+                                    System.out.println("Kullanıcı Menüsüne Dönülüyor...");
                                     break;
                                 default:
-                                    System.out.println("Invalid choice.");
+                                    System.out.println("Hatalı Seçim.");
                             }
                         } while (menuChoice != 6);
                     }
                     break;
                 case 3:
-                    System.out.println("Enter username to delete:");
+                    System.out.println("Silmek İstediğiniz Kullanıcı Adını Giriniz:");
                     String delUsername = scanner.nextLine();
                     userManager.deleteUser(delUsername);
                     break;
                 case 4:
-                    System.out.println("Exiting...");
+                    System.out.println("Çıkış Yapılıyor...");
                     userManager.saveUsers();
                     scanner.close();
                     return;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Hatalı Seçim.");
             }
         }
     }

@@ -11,19 +11,19 @@ public class DepartmentManager {
 
     public void addDepartment(String departmentName) {
         if (departments.containsKey(departmentName)) {
-            System.out.println("Department already exists.");
+            System.out.println("Bölüm zaten mevcut.");
         } else {
             departments.put(departmentName, departmentName);
-            System.out.println("Department added successfully.");
+            System.out.println("Bölüm başarıyla eklendi.");
             saveDepartments();
         }
     }
 
     public void listDepartments() {
         if (departments.isEmpty()) {
-            System.out.println("No departments found.");
+            System.out.println("Hiç bölüm bulunamadı.");
         } else {
-            System.out.println("Departments:");
+            System.out.println("Bölümler:");
             for (String departmentName : departments.keySet()) {
                 System.out.println(departmentName);
             }
@@ -33,10 +33,10 @@ public class DepartmentManager {
     public void deleteDepartment(String departmentName) {
         if (departments.containsKey(departmentName)) {
             departments.remove(departmentName);
-            System.out.println("Department deleted successfully.");
+            System.out.println("Bölüm başarıyla silindi.");
             saveDepartments();
         } else {
-            System.out.println("Department does not exist.");
+            System.out.println("Bölüm mevut değil.");
         }
     }
 

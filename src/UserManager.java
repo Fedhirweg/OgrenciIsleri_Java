@@ -11,41 +11,41 @@ public class UserManager {
 
     public void registerUser(String username, String password, String confirmPassword) {
         if (username == null || username.isEmpty()) {
-            System.out.println("Username cannot be empty.");
+            System.out.println("Kullanıcı adı boş olamaz.");
             return;
         }
 
         if (password == null || password.isEmpty()) {
-            System.out.println("Password cannot be empty.");
+            System.out.println("Şifre boş olamaz.");
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            System.out.println("Passwords do not match.");
+            System.out.println("Şifreler uyuşmuyor.");
             return;
         }
 
         if (password.length() < 8) {
-            System.out.println("Password must be at least 8 characters long.");
+            System.out.println("Şifre en az 8 karakter olmalıdır.");
             return;
         }
 
         if (users.containsKey(username)) {
-            System.out.println("Username already exists.");
+            System.out.println("Kullanıcı adı zaten mevcut.");
             return;
         }
 
         users.put(username, new User(username, password));
-        System.out.println("User registered successfully.");
+        System.out.println("Kullanıcı başarıyla oluşturuldu.");
     }
 
     public User loginUser(String username, String password) {
         User user = users.get(username);
         if (user != null && user.checkPassword(password)) {
-            System.out.println("Login successful.");
+            System.out.println("Giriş başarılı.");
             return user;
         } else {
-            System.out.println("Invalid username or password.");
+            System.out.println("Kullanıcı adı veya şifre hatalı.");
             return null;
         }
     }
@@ -65,9 +65,9 @@ public class UserManager {
     public void deleteUser(String username) {
         if (users.containsKey(username)) {
             users.remove(username);
-            System.out.println("User deleted successfully.");
+            System.out.println("Kullanıcı başarıyla silindi.");
         } else {
-            System.out.println("User does not exist.");
+            System.out.println("Kullanıcı mevcut değil.");
         }
     }
 
@@ -80,9 +80,9 @@ public class UserManager {
             ois.close();
             fis.close();
         } catch (IOException ioe) {
-            System.out.println("No previous user data found.");
+            System.out.println("Kullanıcı kaydı bulunamadı.");
         } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
+            System.out.println("Class bulunamadı");
             c.printStackTrace();
         }
     }
