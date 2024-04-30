@@ -64,15 +64,15 @@ public class Main {
                                                 departmentManager.listDepartments();
                                                 break;
                                             case 3:
-                                                System.out.println("Enter department name to delete:");
+                                                System.out.println("Silinecek bölüm adını giriniz:");
                                                 String delDepartmentName = scanner.nextLine();
                                                 departmentManager.deleteDepartment(delDepartmentName);
                                                 break;
                                             case 4:
-                                                System.out.println("Returning to main menu...");
+                                                System.out.println("Ana menüye dönülüyor...");
                                                 break;
                                             default:
-                                                System.out.println("Invalid choice.");
+                                                System.out.println("Hatalı seçim.");
                                         }
                                     } while (departmentChoice != 4);
                                     break;
