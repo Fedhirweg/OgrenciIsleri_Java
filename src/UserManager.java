@@ -37,6 +37,7 @@ public class UserManager {
 
         users.put(username, new User(username, password));
         System.out.println("Kullanıcı başarıyla oluşturuldu.");
+        saveUsers();
     }
 
     public User loginUser(String username, String password) {
@@ -69,6 +70,7 @@ public class UserManager {
         } else {
             System.out.println("Kullanıcı mevcut değil.");
         }
+        saveUsers();
     }
 
     @SuppressWarnings("unchecked")

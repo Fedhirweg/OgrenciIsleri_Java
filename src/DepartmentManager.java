@@ -61,10 +61,14 @@ public class DepartmentManager {
             ois.close();
             fis.close();
         } catch (IOException ioe) {
-            System.out.println("No previous department data found.");
+            System.out.println("Hiç kayıtlı bölüm bulunamadı.");
         } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
+            System.out.println("Class bulunamadı");
             c.printStackTrace();
         }
+    }
+
+    public boolean departmentExists(String departmentName) {
+        return departments.containsKey(departmentName);
     }
 }
