@@ -6,9 +6,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. Register\n2. Login\n3. Delete User\n4. Exit");
+            System.out.println("1. Kayıt ol\n2. Giriş yap\n3. Kullanıcı kaydı sil\n4. Çıkış yap");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // yenisatir karakterini tüket
+            scanner.nextLine(); // yenisatir karakterini tüketir
 
             switch (choice) {
                 case 1:
@@ -32,7 +32,7 @@ public class Main {
                         do {
                             displayMenu();
                             menuChoice = scanner.nextInt();
-                            scanner.nextLine();  // yenisatir karakterini tüket
+                            scanner.nextLine();  // yenisatir karakterini tüketir
                             switch (menuChoice) {
                                 case 1:
                                     System.out.println("Öğrenci İşlemleri");
@@ -56,7 +56,7 @@ public class Main {
                                         scanner.nextLine();  // consume newline
                                         switch (departmentChoice) {
                                             case 1:
-                                                System.out.println("Enter department name to add:");
+                                                System.out.println("Eklenecek bölüm adını giriniz:");
                                                 String addDepartmentName = scanner.nextLine();
                                                 departmentManager.addDepartment(addDepartmentName);
                                                 break;
