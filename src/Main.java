@@ -59,7 +59,7 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Öğretim Görevlisi İşlemleri");
-                        teacherOperations();
+                        teacherOperations(scanner, departmentManager);
                         break;
                     case 3:
                         System.out.println("Ders İşlemleri");
@@ -133,7 +133,42 @@ public class Main {
         } while (studentChoice != 7);
     }
 
-    public static void teacherOperations() {}
+    public static void teacherOperations(Scanner scanner, DepartmentManager departmentManager) {
+        System.out.println("Öğretim Görevlisi İşlemleri");
+        TeacherManager teacherManager = new TeacherManager();
+        int teacherChoice;
+        do {
+            System.out.println("1. Öğretim Görevlisi Ekle\n2. Öğretim Görevlisi Sil\n3. Öğretim Görevlisi Ara\n4. Geri");
+            teacherChoice = scanner.nextInt();
+            scanner.nextLine();  // consume newline
+            switch (teacherChoice) {
+                case 1:
+                    System.out.println("Eklenecek öğretim görevlisi numarasını giriniz:");
+                    String addTeacherId = scanner.nextLine();
+                    System.out.println("Eklenecek öğretim görevlisi adını giriniz:");
+                    String addTeacherName = scanner.nextLine();
+                    System.out.println("Öğretim görevlisi bölümünü giriniz:");
+                    String addTeacherDepartment = scanner.nextLine();
+                    teacherManager.addTeacher(addTeacherId, addTeacherName, addTeacherDepartment);
+                    break;
+                case 2:
+                    System.out.println("Silinecek öğretim görevlisi numarasını giriniz:");
+                    String delTeacherId = scanner.nextLine();
+                    teacherManager.deleteTeacher(delTeacherId);
+                    break;
+                case 3:
+                    System.out.println("Aranacak öğretim görevlisi numarasını giriniz:");
+                    String searchTeacherId = scanner.nextLine();
+                    teacherManager.searchTeacher(searchTeacherId);
+                    break;
+                case 4:
+                    System.out.println("Ana menüye dönülüyor...");
+                    break;
+                default:
+                    System.out.println("Hatalı seçim.");
+            }
+        } while (teacherChoice != 4);
+    }
 
     public static void courseOperations() {}
 
