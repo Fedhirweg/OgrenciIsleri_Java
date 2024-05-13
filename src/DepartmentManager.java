@@ -71,4 +71,8 @@ public class DepartmentManager {
     public boolean departmentExists(String departmentName) {
         return departments.containsKey(departmentName);
     }
+
+    public HashMap<String, String> getDepartments() {
+        return departments;
+    }
 }

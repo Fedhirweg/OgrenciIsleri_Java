@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TeacherManager {
@@ -65,5 +66,9 @@ public class TeacherManager {
             System.out.println("Class bulunamadı");
             c.printStackTrace();
         }
+    }
+
+    public ArrayList<Teacher> getTeachers() {
+        return new ArrayList<>(teachers.values());
     }
 }

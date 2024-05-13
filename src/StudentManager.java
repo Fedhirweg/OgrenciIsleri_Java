@@ -10,22 +10,29 @@ import java.util.Scanner;
         public StudentManager() {
             loadStudents();
         }
-    public void addStudent(String studentName, String ogrenciNo, DepartmentManager departmentManager, Scanner scanner) {
-        if (students.containsKey(ogrenciNo)) {
-            System.out.println("Öğrenci zaten mevcut.");
-        } else {
-            departmentManager.listDepartments();
-            System.out.println("Öğrencinin bölümünü seçiniz:");
-            String departmentName = scanner.nextLine();
-            if (departmentManager.departmentExists(departmentName)) {
-                students.put(ogrenciNo, new Student(studentName, departmentName, ogrenciNo));
-                System.out.println("Öğrenci başarıyla eklendi.");
+
+        public void addStudent(String studentName, String ogrenciNo, DepartmentManager departmentManager, Scanner scanner) {
+            if (students.containsKey(ogrenciNo)) {
+                System.out.println("Öğrenci zaten mevcut.");
             } else {
-                System.out.println("Bölüm bulunamadı.");
+                HashMap<String, String> departmentList = departmentManager.getDepartments();
+                ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
+                for (int i = 0; i < departmentNames.size(); i++) {
+                    System.out.println((i + 1) + ". " + departmentNames.get(i));
+                }
+                System.out.println("Öğrencinin bölümünü seçiniz:");
+                int departmentIndex = scanner.nextInt() - 1;
+                scanner.nextLine();  // consume newline
+                if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
+                    String departmentName = departmentNames.get(departmentIndex);
+                    students.put(ogrenciNo, new Student(studentName, departmentName, ogrenciNo));
+                    System.out.println("Öğrenci başarıyla eklendi.");
+                } else {
+                    System.out.println("Geçersiz bölüm seçimi.");
+                }
             }
+            saveStudents();
         }
-        saveStudents();
-    }
 
     public void deleteStudent(String ogrenciNo) {
         if (students.containsKey(ogrenciNo)) {
@@ -47,27 +54,38 @@ import java.util.Scanner;
         }
     }
 
-    public void listStudents(Scanner scanner) {
-        System.out.println("Hangi bölümün öğrencilerini listelemek istersiniz?");
-        String departmentName = scanner.nextLine();
+        public void listStudents(Scanner scanner, DepartmentManager departmentManager) {
+            System.out.println("Hangi bölümün öğrencilerini listelemek istersiniz?");
+            HashMap<String, String> departmentList = departmentManager.getDepartments();
+            ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
+            for (int i = 0; i < departmentNames.size(); i++) {
+                System.out.println((i + 1) + ". " + departmentNames.get(i));
+            }
+            int departmentIndex = scanner.nextInt() - 1;
+            scanner.nextLine();  // consume newline
+            if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
+                String departmentName = departmentNames.get(departmentIndex);
 
-        ArrayList<Student> departmentStudents = new ArrayList<>();
-        for (Student student : students.values()) {
-            if (student.getDepartment().equals(departmentName)) {
-                departmentStudents.add(student);
+                ArrayList<Student> departmentStudents = new ArrayList<>();
+                for (Student student : students.values()) {
+                    if (student.getDepartment().equals(departmentName)) {
+                        departmentStudents.add(student);
+                    }
+                }
+
+                if (departmentStudents.isEmpty()) {
+                    System.out.println(departmentName + " bölümünde hiç öğrenci bulunamadı.");
+                } else {
+                    System.out.println(departmentName + " bölümündeki öğrenciler:");
+                    System.out.printf("%-20s %-20s %-20s %-20s\n", "Öğrenci Adı", "Bölüm", "Öğrenci Numarası", "Mezun mu?");
+                    for (Student student : departmentStudents) {
+                        System.out.printf("%-20s %-20s %-20s %-20s\n", student.getName(), student.getDepartment(), student.getStudentId(), student.isGraduated() ? "Evet" : "Hayır");
+                    }
+                }
+            } else {
+                System.out.println("Geçersiz bölüm seçimi.");
             }
         }
-
-        if (departmentStudents.isEmpty()) {
-            System.out.println(departmentName + " bölümünde hiç öğrenci bulunamadı.");
-        } else {
-            System.out.println(departmentName + " bölümündeki öğrenciler:");
-            for (Student student : departmentStudents) {
-                System.out.println("Öğrenci Adı: " + student.getName());
-                System.out.println("Öğrenci Numarası: " + student.getStudentId());
-            }
-        }
-    }
 
     public void generateStudentDocument(String ogrenciNo) {
             if (students.containsKey(ogrenciNo)) {

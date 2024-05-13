@@ -1,10 +1,10 @@
 import java.io.Serializable;
 
 public class Student implements Serializable {
-    private String name;
-    private String department;
+    private final String name;
+    private final String department;
     private boolean graduated;
-    private String studentId;
+    private final String studentId;
 
     public Student(String name, String department, String studentId) {
         this.name = name;
@@ -32,6 +32,4 @@ public class Student implements Serializable {
     public void setGraduated(boolean graduated) {
         this.graduated = graduated;
     }
-
-
 }
