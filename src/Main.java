@@ -272,9 +272,7 @@ public class Main {
                     departmentManager.listDepartments();
                     break;
                 case 3:
-                    System.out.println("Silinecek bölüm adını giriniz:");
-                    String delDepartmentName = scanner.nextLine();
-                    departmentManager.deleteDepartment(delDepartmentName);
+                    departmentManager.deleteDepartment(scanner);
                     break;
                 case 4:
                     System.out.println("Ana menüye dönülüyor...");

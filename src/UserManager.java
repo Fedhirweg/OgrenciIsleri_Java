@@ -25,11 +25,6 @@ public class UserManager {
             return;
         }
 
-        if (password.length() < 8) {
-            System.out.println("Şifre en az 8 karakter olmalıdır.");
-            return;
-        }
-
         if (users.containsKey(username)) {
             System.out.println("Kullanıcı adı zaten mevcut.");
             return;

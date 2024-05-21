@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.*;
+import java.util.Scanner;
 
 public class DepartmentManager {
     private HashMap<String, String> departments = new HashMap<>();
@@ -30,16 +32,27 @@ public class DepartmentManager {
         }
     }
 
-    public void deleteDepartment(String departmentName) {
-        if (departments.containsKey(departmentName)) {
-            departments.remove(departmentName);
-            System.out.println("Bölüm başarıyla silindi.");
-            saveDepartments();
+    public void deleteDepartment(Scanner scanner) {
+        if (departments.isEmpty()) {
+            System.out.println("Hiç bölüm bulunamadı.");
         } else {
-            System.out.println("Bölüm mevut değil.");
+            ArrayList<String> departmentNames = new ArrayList<>(departments.values());
+            for (int i = 0; i < departmentNames.size(); i++) {
+                System.out.println((i + 1) + ". " + departmentNames.get(i));
+            }
+            System.out.println("Silinecek bölümü seçiniz:");
+            int departmentIndex = scanner.nextInt() - 1;
+            scanner.nextLine();  // consume newline
+            if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
+                String departmentName = departmentNames.get(departmentIndex);
+                departments.remove(departmentName);
+                System.out.println("Bölüm başarıyla silindi.");
+                saveDepartments();
+            } else {
+                System.out.println("Geçersiz bölüm seçimi.");
+            }
         }
     }
-
     public void saveDepartments() {
         try {
             FileOutputStream fos = new FileOutputStream(DEPARTMENT_FILE);
