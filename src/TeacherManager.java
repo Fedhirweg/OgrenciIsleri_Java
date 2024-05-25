@@ -10,11 +10,13 @@ public class TeacherManager {
         loadTeachers();
     }
 
-    public void addTeacher(String id, String name, String department) {
+    public void addTeacher(String name, String department) {
+        Teacher teacher = new Teacher(name, department);
+        String id = teacher.getId();
         if (teachers.containsKey(id)) {
             System.out.println("Öğretim görevlisi zaten mevcut.");
         } else {
-            teachers.put(id, new Teacher(id, name, department));
+            teachers.put(id, teacher);
             System.out.println("Öğretim görevlisi başarıyla eklendi.");
             saveTeachers();
         }
@@ -37,6 +39,20 @@ public class TeacherManager {
             System.out.println("Bölüm: " + teacher.getDepartment());
         } else {
             System.out.println("Öğretim görevlisi bulunamadı.");
+        }
+    }
+
+    public void listTeachers() {
+        if (teachers.isEmpty()) {
+            System.out.println("Hiç öğretim görevlisi bulunamadı.");
+        } else {
+            System.out.printf("%-15s %-20s %-20s\n", "OGRETMEN-ID", "OGRETMEN-ADI", "BOLUM-ADI");
+            for (Teacher teacher : teachers.values()) {
+                System.out.printf("%-15s %-20s %-20s\n",
+                        teacher.getId(),
+                        teacher.getName(),
+                        teacher.getDepartment());
+            }
         }
     }
 
@@ -70,5 +86,14 @@ public class TeacherManager {
 
     public ArrayList<Teacher> getTeachers() {
         return new ArrayList<>(teachers.values());
+    }
+
+    public String getTeacherNameById(String teacherId) {
+        for (Teacher teacher : teachers.values()) {
+            if (teacher.getId().equals(teacherId)) {
+                return teacher.getName();
+            }
+        }
+        return "Unknown";
     }
 }

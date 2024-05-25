@@ -34,19 +34,25 @@ public class CourseManager {
         }
     }
 
-    public void updateCourse(Course course) {
-        if (courses.containsKey(course.getCourseId())) {
-            courses.put(course.getCourseId(), course);
-            System.out.println("Course updated successfully.");
-            saveCourses();
-        } else {
-            System.out.println("Course does not exist.");
-        }
-    }
+//    public void updateCourse(Course course) {
+//        if (courses.containsKey(course.getCourseId())) {
+//            courses.put(course.getCourseId(), course);
+//            System.out.println("Course updated successfully.");
+//            saveCourses();
+//        } else {
+//            System.out.println("Course does not exist.");
+//        }
+//    }
 
-    public void listCourses() {
+    public void listCourses(TeacherManager teacherManager) {
+        System.out.printf("%-10s %-20s %-20s %-10s\n", "Ders ID", "Ders Adı", "Öğr. Gör. Adı", "AKTS");
         for (Course course : courses.values()) {
-            System.out.println(course.getCourseName());
+            String teacherName = teacherManager.getTeacherNameById(course.getTeacherId());
+            System.out.printf("%-10s %-20s %-20s %-10d\n",
+                    course.getCourseId(),
+                    course.getCourseName(),
+                    teacherName,
+                    course.getCreditScore());
         }
     }
 

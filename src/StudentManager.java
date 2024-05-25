@@ -18,6 +18,8 @@ import java.util.Scanner;
         public void addStudent(String studentName, DepartmentManager departmentManager, Scanner scanner) {
             HashMap<String, String> departmentList = departmentManager.getDepartments();
             ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
+            System.out.println("Öğrencinin TC Kimlik Numarasını giriniz:");
+            String tcKimlikNo = scanner.nextLine();
             for (int i = 0; i < departmentNames.size(); i++) {
                 System.out.println((i + 1) + ". " + departmentNames.get(i));
             }
@@ -26,7 +28,7 @@ import java.util.Scanner;
             scanner.nextLine();  // consume newline
             if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
                 String departmentName = departmentNames.get(departmentIndex);
-                Student student = new Student(studentName, departmentName);
+                Student student = new Student(studentName, departmentName, tcKimlikNo);
                 students.put(student.getStudentId(), student);
                 System.out.println("Öğrenci başarıyla eklendi.");
             } else {
@@ -85,9 +87,9 @@ import java.util.Scanner;
                     System.out.println(departmentName + " bölümünde hiç öğrenci bulunamadı.");
                 } else {
                     System.out.println(departmentName + " bölümündeki öğrenciler:");
-                    System.out.printf("%-20s %-20s %-20s %-20s\n", "Öğrenci Adı", "Bölüm", "Öğrenci Numarası", "Mezun mu?");
+                    System.out.printf("%-20s %-20s %-20s %-20s\n", "Öğrenci No", "Öğrenci Adı","TC Kimlik No", "Mezun mu?");
                     for (Student student : departmentStudents) {
-                        System.out.printf("%-20s %-20s %-20s %-20s\n", student.getName(), student.getDepartment(), student.getStudentId(), student.isGraduated() ? "Evet" : "Hayır");
+                        System.out.printf("%-20s %-20s %-20s %-20s\n",student.getStudentId(), student.getName(), student.getTcKimlikNo(), student.isGraduated() ? "Evet" : "Hayır");
                     }
                 }
             } else {
@@ -100,6 +102,7 @@ import java.util.Scanner;
                 Student student = students.get(ogrenciNo);
                 System.out.println(ogrenciNo + " numaralı öğrenci " + (student.isGraduated() ? "MEZUN" : "AKTİF") + " öğrenci durumundadır. Bilgileri aşağıdaki gibidir:");
                 System.out.println("Öğrenci Adı: " + student.getName());
+                System.out.println("TC Kimlik No: " + student.getTcKimlikNo());
                 System.out.println("Bölüm: " + student.getDepartment());
                 // daha fazla bilgi listeleme eklenecek
             } else {

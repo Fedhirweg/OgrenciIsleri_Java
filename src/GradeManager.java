@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class GradeManager {
@@ -43,13 +44,32 @@ public class GradeManager {
             }
         }
     }
-    public void deleteGrade(String gradeId) {
-        if (grades.containsKey(gradeId)) {
-            grades.remove(gradeId);
-            System.out.println("Not başarıyla silindi.");
-            saveGrades();
+    public void deleteGrade(Scanner scanner) {
+        if (grades.isEmpty()) {
+            System.out.println("Hiç not bulunamadı.");
         } else {
-            System.out.println("Not mevcut değil.");
+            // List all grades with their IDs
+//            System.out.println("Silmek istediğiniz notun ID'sini seçiniz:");
+//            for (Grade grade : grades.values()) {
+//                System.out.printf("%s: %s - %s, %d\n",
+//                        grade.getGradeId(),
+//                        grade.getStudentName(),
+//                        grade.getCourseName(),
+//                        grade.getScore());
+//            }
+            listGrades();
+
+            System.out.println("Silmek istediğiniz notun ID'sini giriniz:");
+            String gradeId = scanner.nextLine();
+
+            // Not id'si mevcutsa sil
+            if (grades.containsKey(gradeId)) {
+                grades.remove(gradeId);
+                System.out.println("Not başarıyla silindi.");
+                saveGrades();
+            } else {
+                System.out.println("Not mevcut değil.");
+            }
         }
     }
 
