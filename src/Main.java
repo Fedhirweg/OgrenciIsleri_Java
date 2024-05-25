@@ -62,7 +62,7 @@ public class Main {
             System.out.println("                                     ");
             System.out.println("        ******************************************");
             System.out.println("        *                                        *");
-            System.out.printf("        *      Hosgeldin,                        *\n");
+            System.out.println("        *      Hosgeldin,                        *\n");
             System.out.println("        *                                        *");
             System.out.println("        ******************************************");
 
