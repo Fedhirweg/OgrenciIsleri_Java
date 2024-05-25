@@ -1,16 +1,17 @@
 import java.io.Serializable;
 
 public class Student implements Serializable {
+    public static int idCounter = 0;
     private final String name;
     private final String department;
     private boolean graduated;
     private final String studentId;
 
-    public Student(String name, String department, String studentId) {
+    public Student(String name, String department) {
         this.name = name;
         this.department = department;
         this.graduated = false;
-        this.studentId = studentId;
+        this.studentId = "S" + idCounter++;
     }
 
     public String getName() {

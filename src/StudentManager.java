@@ -11,25 +11,26 @@ import java.util.Scanner;
             loadStudents();
         }
 
-        public void addStudent(String studentName, String ogrenciNo, DepartmentManager departmentManager, Scanner scanner) {
-            if (students.containsKey(ogrenciNo)) {
-                System.out.println("Öğrenci zaten mevcut.");
+        public ArrayList<Student> getStudents() {
+            return new ArrayList<>(students.values());
+        }
+
+        public void addStudent(String studentName, DepartmentManager departmentManager, Scanner scanner) {
+            HashMap<String, String> departmentList = departmentManager.getDepartments();
+            ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
+            for (int i = 0; i < departmentNames.size(); i++) {
+                System.out.println((i + 1) + ". " + departmentNames.get(i));
+            }
+            System.out.println("Öğrencinin bölümünü seçiniz:");
+            int departmentIndex = scanner.nextInt() - 1;
+            scanner.nextLine();  // consume newline
+            if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
+                String departmentName = departmentNames.get(departmentIndex);
+                Student student = new Student(studentName, departmentName);
+                students.put(student.getStudentId(), student);
+                System.out.println("Öğrenci başarıyla eklendi.");
             } else {
-                HashMap<String, String> departmentList = departmentManager.getDepartments();
-                ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
-                for (int i = 0; i < departmentNames.size(); i++) {
-                    System.out.println((i + 1) + ". " + departmentNames.get(i));
-                }
-                System.out.println("Öğrencinin bölümünü seçiniz:");
-                int departmentIndex = scanner.nextInt() - 1;
-                scanner.nextLine();  // consume newline
-                if (departmentIndex >= 0 && departmentIndex < departmentNames.size()) {
-                    String departmentName = departmentNames.get(departmentIndex);
-                    students.put(ogrenciNo, new Student(studentName, departmentName, ogrenciNo));
-                    System.out.println("Öğrenci başarıyla eklendi.");
-                } else {
-                    System.out.println("Geçersiz bölüm seçimi.");
-                }
+                System.out.println("Geçersiz bölüm seçimi.");
             }
             saveStudents();
         }
@@ -58,6 +59,13 @@ import java.util.Scanner;
             System.out.println("Hangi bölümün öğrencilerini listelemek istersiniz?");
             HashMap<String, String> departmentList = departmentManager.getDepartments();
             ArrayList<String> departmentNames = new ArrayList<>(departmentList.values());
+
+            // Check if the department list is empty
+            if (departmentNames.isEmpty()) {
+                System.out.println("Hiç bölüm bulunamadı.");
+                return; // Return early
+            }
+
             for (int i = 0; i < departmentNames.size(); i++) {
                 System.out.println((i + 1) + ". " + departmentNames.get(i));
             }

@@ -94,7 +94,7 @@ public class Main {
                         break;
                     case 4:
                         System.out.println("Not İşlemleri");
-                        gradeOperations(scanner, new CourseManager(), new StudentManager());
+                        gradeOperations(scanner, new CourseManager(), new StudentManager(), departmentManager);
                         break;
                     case 5:
                         System.out.println("Bölüm İşlemleri");
@@ -125,9 +125,7 @@ public class Main {
                 case 1:
                     System.out.println("Eklenecek öğrenci adını giriniz:");
                     String addStudentName = scanner.nextLine();
-                    System.out.println("Öğrenci numarasını giriniz:");
-                    String ogrenciNo = scanner.nextLine();
-                    studentManager.addStudent(addStudentName, ogrenciNo, departmentManager, scanner);
+                    studentManager.addStudent(addStudentName, departmentManager, scanner);
                     break;
                 case 2:
                     System.out.println("Silinecek öğrenci adını giriniz:");
@@ -277,8 +275,65 @@ public class Main {
         } while (courseChoice != 5);
     }
 
-    public static void gradeOperations(Scanner scanner, CourseManager courseManager, StudentManager studentManager) {
-        System.out.println("Not İşlemleri");
+    public static void gradeOperations(Scanner scanner, CourseManager courseManager, StudentManager studentManager, DepartmentManager departmentManager) {
+        GradeManager gradeManager = new GradeManager();
+        int gradeChoice;
+        do {
+            System.out.println("1. Not Ekle\n2. Notları Listele\n3. Not Sil\n4. Geri");
+            gradeChoice = scanner.nextInt();
+            scanner.nextLine();  // consume newline
+            switch (gradeChoice) {
+                case 1:
+                    ArrayList<Course> courseList = courseManager.getCourses();
+                    for (int i = 0; i < courseList.size(); i++) {
+                        System.out.println((i + 1) + ". " + courseList.get(i).getCourseName());
+                    }
+                    System.out.println("Dersi seçiniz:");
+                    int courseIndex = scanner.nextInt() - 1;
+                    scanner.nextLine();  // consume newline
+                    String courseName = courseList.get(courseIndex).getCourseName();
+
+                    ArrayList<Student> studentList = studentManager.getStudents();
+                    for (int i = 0; i < studentList.size(); i++) {
+                        System.out.println((i + 1) + ". " + studentList.get(i).getName());
+                    }
+                    System.out.println("Öğrenciyi seçiniz:");
+                    int studentIndex = scanner.nextInt() - 1;
+                    scanner.nextLine();  // consume newline
+                    String studentId = studentList.get(studentIndex).getStudentId();
+                    String studentName = studentList.get(studentIndex).getName();
+
+                    System.out.println("Puanı giriniz:");
+                    int score = scanner.nextInt();
+                    scanner.nextLine();  // consume newline
+
+                    ArrayList<String> departmentList = new ArrayList<>(departmentManager.getDepartments().values());
+                    for (int i = 0; i < departmentList.size(); i++) {
+                        System.out.println((i + 1) + ". " + departmentList.get(i));
+                    }
+                    System.out.println("Bölümü seçiniz:");
+                    int departmentIndex = scanner.nextInt() - 1;
+                    scanner.nextLine();  // consume newline
+                    String departmentName = departmentList.get(departmentIndex);
+
+                    Grade grade = new Grade(courseName, studentId, studentName, score, departmentName);
+                    gradeManager.addGrade(grade);
+                    break;
+                case 2:
+                    gradeManager.listGrades();
+                    break;
+                case 3:
+                    System.out.println("Silinecek notun ID'sini giriniz:");
+                    String delGradeId = scanner.nextLine();
+                    gradeManager.deleteGrade(delGradeId);
+                    break;
+                case 4:
+                    System.out.println("Ana menüye dönülüyor...");
+                    break;
+                default:
+                    System.out.println("Hatalı seçim.");
+            }
+        } while (gradeChoice != 4);
     }
 
     public static void departmentOperations(Scanner scanner, DepartmentManager departmentManager) {

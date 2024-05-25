@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CourseManager {
@@ -7,6 +8,10 @@ public class CourseManager {
 
     public CourseManager() {
         loadCourses();
+    }
+
+    public ArrayList<Course> getCourses() {
+        return new ArrayList<>(courses.values());
     }
 
     public void addCourse(Course course) {
