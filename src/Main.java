@@ -16,6 +16,7 @@ public class Main {
             System.out.println("\t\t*                                           *");
             System.out.println("\t\t*              \t1. KAYIT OL                 *");
             System.out.println("\t\t*              \t2. GIRIS YAP                *");
+            System.out.println("\t\t*              \t3. KULLANICI SIL            *");
             System.out.println("\t\t*              \t0. CIKIS                    *");
             System.out.println("\t\t*                                           *");
             System.out.println("\t\t*********************************************");
@@ -40,7 +41,7 @@ public class Main {
                     String delUsername = scanner.nextLine();
                     userManager.deleteUser(delUsername);
                     break;
-                case 4:
+                case 0:
                     System.out.println("Çıkış Yapılıyor...");
                     scanner.close();
                     return;
