@@ -8,7 +8,17 @@ public class Main {
         DepartmentManager departmentManager = new DepartmentManager();
 
         while (true) {
-            System.out.println("1. Kayıt ol\n2. Giriş yap\n3. Kullanıcı kaydı sil\n4. Çıkış yap");
+            System.out.println("\n\n\t\t*********************************************");
+            System.out.println("\t\t*                                           *");
+            System.out.println("\t\t*                                           *");
+            System.out.println("\t\t*         OGRENCI ISLERI OTOMASYONU         *");
+            System.out.println("\t\t*                                           *");
+            System.out.println("\t\t*                                           *");
+            System.out.println("\t\t*              \t1. KAYIT OL                 *");
+            System.out.println("\t\t*              \t2. GIRIS YAP                *");
+            System.out.println("\t\t*              \t0. CIKIS                    *");
+            System.out.println("\t\t*                                           *");
+            System.out.println("\t\t*********************************************");
             int choice = scanner.nextInt();
             scanner.nextLine(); // yenisatir karakterini tüketir
 
@@ -48,7 +58,14 @@ public class Main {
         User loggedInUser = userManager.loginUser(loginUsername, loginPassword);
         StudentManager studentManager = null;
         if (loggedInUser != null) {
-            System.out.println("Hoşgeldiniz, " + loggedInUser.getUsername() + "!");
+            System.out.println("Giris basarili!");
+            System.out.println("                                     ");
+            System.out.println("        ******************************************");
+            System.out.println("        *                                        *");
+            System.out.printf("        *      Hosgeldin,                        *\n");
+            System.out.println("        *                                        *");
+            System.out.println("        ******************************************");
+
             int menuChoice;
             do {
                 System.out.println("1. Öğrenci İşlemleri\n2. Öğretim Görevlisi İşlemleri\n3. Ders İşlemleri\n4. Not İşlemleri\n5. Bölüm İşlemleri\n6. Kullanıcı Menüsüne Dön\n7. Çıkış Yap");
