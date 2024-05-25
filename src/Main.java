@@ -59,13 +59,20 @@ public class Main {
         StudentManager studentManager = null;
         if (loggedInUser != null) {
             System.out.println("Giris basarili!");
+
+            String username = loggedInUser.getUsername();
+            int usernameLength = username.length();
+            int totalLength = 34; // total length of the line
+            int remainingSpaces = totalLength - usernameLength - 11; // calculate remaining spaces, 11 is the length of "Hosgeldin, "
+
+            String spacesAfterStr = new String(new char[remainingSpaces]).replace('\0', ' ');
+
             System.out.println("                                     ");
             System.out.println("        ******************************************");
             System.out.println("        *                                        *");
-            System.out.println("        *      Hosgeldin,                        *\n");
+            System.out.println("        *      Hosgeldin, " + username + spacesAfterStr + "*");
             System.out.println("        *                                        *");
             System.out.println("        ******************************************");
-
             int menuChoice;
             do {
                 System.out.println("1. Öğrenci İşlemleri\n2. Öğretim Görevlisi İşlemleri\n3. Ders İşlemleri\n4. Not İşlemleri\n5. Bölüm İşlemleri\n6. Kullanıcı Menüsüne Dön\n7. Çıkış Yap");
