@@ -265,7 +265,7 @@ public class Main {
                         System.out.println("Dersin kredi puanını giriniz:");
                         int creditScore = scanner.nextInt();
                         scanner.nextLine();  // consume newline
-                        courseManager.addCourse(new Course( courseName, teacherId, new ArrayList<>(), creditScore));
+                        courseManager.addCourse(new Course( courseName, teacherId, new ArrayList<>()));
                     } else {
                         System.out.println("Geçersiz öğretim görevlisi seçimi.");
                     }

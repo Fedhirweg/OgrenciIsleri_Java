@@ -10,7 +10,7 @@ public class Course implements Serializable {
     private int creditScore;
 
     // constructor, getters, setters
-    public Course(String courseName, String teacherId, List<String> studentIds, int updateCreditScore) {
+    public Course(String courseName, String teacherId, List<String> studentIds) {
         this.courseId = "C" + idCounter++;
         this.courseName = courseName;
         this.teacherId = teacherId;
