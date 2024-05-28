@@ -27,7 +27,7 @@ public class GradeManager {
         if (grades.isEmpty()) {
             System.out.println("Hiç not bulunamadı.");
         } else {
-            // Sort the grades by student name
+            
             List<Grade> sortedGrades = grades.values().stream()
                     .sorted(Comparator.comparing(Grade::getStudentName))
                     .collect(Collectors.toList());
@@ -48,21 +48,13 @@ public class GradeManager {
         if (grades.isEmpty()) {
             System.out.println("Hiç not bulunamadı.");
         } else {
-            // List all grades with their IDs
-//            System.out.println("Silmek istediğiniz notun ID'sini seçiniz:");
-//            for (Grade grade : grades.values()) {
-//                System.out.printf("%s: %s - %s, %d\n",
-//                        grade.getGradeId(),
-//                        grade.getStudentName(),
-//                        grade.getCourseName(),
-//                        grade.getScore());
-//            }
+            
             listGrades();
 
             System.out.println("Silmek istediğiniz notun ID'sini giriniz:");
             String gradeId = scanner.nextLine();
 
-            // Not id'si mevcutsa sil
+            
             if (grades.containsKey(gradeId)) {
                 grades.remove(gradeId);
                 System.out.println("Not başarıyla silindi.");
