@@ -33,7 +33,7 @@ public class Main {
             System.out.println("\t\t*                                           *");
             System.out.println("\t\t*********************************************");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // yenisatir karakterini tüketir
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -79,8 +79,8 @@ public class Main {
 
             String username = loggedInUser.getUsername();
             int usernameLength = username.length();
-            int totalLength = 34; // total length of the line
-            int remainingSpaces = totalLength - usernameLength - 11; // calculate remaining spaces, 11 is the length of "Hosgeldin, "
+            int totalLength = 34;
+            int remainingSpaces = totalLength - usernameLength - 11;
 
             String spacesAfterStr = new String(new char[remainingSpaces]).replace('\0', ' ');
 
@@ -136,7 +136,7 @@ public class Main {
         do {
             System.out.println("1. Öğrenci Ekle\n2. Öğrenci Sil\n3. Öğrenci Ara\n4. Öğrenci Listele\n5. Öğrenci Belgesi\n6. Öğrenci Mezuniyet \n7. Geri");
             studentChoice = scanner.nextInt();
-            scanner.nextLine();  // consume newline
+            scanner.nextLine();
             switch (studentChoice) {
                 case 1:
                     System.out.println("\nÖğrenci Ekleme İşlemi\n");
@@ -190,7 +190,7 @@ public class Main {
         do {
             System.out.println("1. Öğretim Görevlisi Ekle\n2. Öğretim Görevlisi Sil\n3. Öğretim Görevlisi Ara\n4. Öğretim Görevlisi Listele.\n5. Geri");
             teacherChoice = scanner.nextInt();
-            scanner.nextLine();  // consume newline
+            scanner.nextLine();
             switch (teacherChoice) {
                 case 1:
                     System.out.println("Eklenecek öğretim görevlisi adını giriniz:");
@@ -217,7 +217,7 @@ public class Main {
                     }
                     System.out.println("Silinecek öğretim görevlisini seçiniz:");
                     int teacherIndex = scanner.nextInt() - 1;
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine();
 
                     if (teacherIndex >= 0 && teacherIndex < teacherList.size()) {
                         String delTeacherId = teacherList.get(teacherIndex).getId();
@@ -296,7 +296,7 @@ public class Main {
         do {
             System.out.println("1. Not Ekle\n2. Notları Listele\n3. Not Sil\n4. Geri");
             gradeChoice = scanner.nextInt();
-            scanner.nextLine();  // consume newline
+            scanner.nextLine();
             switch (gradeChoice) {
                 case 1:
                     ArrayList<Course> courseList = courseManager.getCourses();
@@ -305,7 +305,7 @@ public class Main {
                     }
                     System.out.println("Dersi seçiniz:");
                     int courseIndex = scanner.nextInt() - 1;
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine();
                     String courseName = courseList.get(courseIndex).getCourseName();
 
                     ArrayList<Student> studentList = studentManager.getStudents();
@@ -314,13 +314,13 @@ public class Main {
                     }
                     System.out.println("Öğrenciyi seçiniz:");
                     int studentIndex = scanner.nextInt() - 1;
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine();
                     String studentId = studentList.get(studentIndex).getStudentId();
                     String studentName = studentList.get(studentIndex).getName();
 
                     System.out.println("Puanı giriniz:");
                     int score = scanner.nextInt();
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine();
 
                     ArrayList<String> departmentList = new ArrayList<>(departmentManager.getDepartments().values());
                     for (int i = 0; i < departmentList.size(); i++) {
@@ -328,7 +328,7 @@ public class Main {
                     }
                     System.out.println("Bölümü seçiniz:");
                     int departmentIndex = scanner.nextInt() - 1;
-                    scanner.nextLine();  // consume newline
+                    scanner.nextLine();
                     String departmentName = departmentList.get(departmentIndex);
 
                     Grade grade = new Grade(courseName, studentId, studentName, score, departmentName);
@@ -354,7 +354,7 @@ public class Main {
         do {
             System.out.println("1. Bölüm Ekleme\n2. Bölüm Listeleme\n3. Bölüm Silme\n4. Geri");
             departmentChoice = scanner.nextInt();
-            scanner.nextLine();  // consume newline
+            scanner.nextLine();
             switch (departmentChoice) {
                 case 1:
                     System.out.println("Eklenecek bölüm adını giriniz:");
