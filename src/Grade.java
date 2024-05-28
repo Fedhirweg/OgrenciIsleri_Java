@@ -42,7 +42,7 @@ public class Grade implements Serializable {
         }
     }
 
-    // getters
+    
     public String getGradeId() {
         return gradeId;
     }
