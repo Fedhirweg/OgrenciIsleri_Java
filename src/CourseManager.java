@@ -16,10 +16,10 @@ public class CourseManager {
 
     public void addCourse(Course course) {
         if (courses.containsKey(course.getCourseId())) {
-            System.out.println("Course already exists.");
+            System.out.println("Ders zaten mevcut.");
         } else {
             courses.put(course.getCourseId(), course);
-            System.out.println("Course added successfully.");
+            System.out.println("Ders başarıyla eklendi");
             saveCourses();
         }
     }
@@ -27,22 +27,12 @@ public class CourseManager {
     public void deleteCourse(String courseId) {
         if (courses.containsKey(courseId)) {
             courses.remove(courseId);
-            System.out.println("Course deleted successfully.");
+            System.out.println("Ders başarıyla silindi");
             saveCourses();
         } else {
-            System.out.println("Course does not exist.");
+            System.out.println("Ders mevcut değil");
         }
     }
-
-//    public void updateCourse(Course course) {
-//        if (courses.containsKey(course.getCourseId())) {
-//            courses.put(course.getCourseId(), course);
-//            System.out.println("Course updated successfully.");
-//            saveCourses();
-//        } else {
-//            System.out.println("Course does not exist.");
-//        }
-//    }
 
     public void listCourses(TeacherManager teacherManager) {
         System.out.printf("%-10s %-20s %-20s %-10s\n", "Ders ID", "Ders Adı", "Öğr. Gör. Adı", "AKTS");
